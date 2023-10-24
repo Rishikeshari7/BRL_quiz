@@ -42,8 +42,9 @@ async function fetchQuestions(){
     catch (error){
         console.error("error in fetching question",error);
     }
-    
+
 }
+
 function displayQuestion(){
     const question = questions[currentQuestionIndex];
     questionElement.textContent = question.question;
@@ -67,3 +68,37 @@ function displayQuestion(){
     });
 }
 
+    nextButton.addEventListener("click", loadNextQuestion);
+    skipButton.addEventListener("click", skipQuestion);
+
+    function loadNextQuestion(){
+        const selectedOption = document.querySelector('input[name="answer"]:checked');
+        if(selectedOption){
+            userAnswer.push(selectedOption.value);
+        }
+        else{
+            userAnswer.push(null);
+        }
+        currentQuestionIndex++;
+        updateQuestionNumber();
+        updateAttemptedUnattemptedCount();
+
+
+    }
+    function  updateQuestionNumber(){
+        questionNumberElement.textContent = `Question: ${currentQuestionIndex + 1}`;
+    }
+    function updateAttemptedUnattemptedCount(){
+        const attemptedCount = userAnswer.filter(element => element!== null).length;
+        const unattemptedCount = questions.length-attemptedCount;
+
+        attemptedCountElement.textContent = `Attempted: ${attemptedCount}`;
+            unattemptedCountElement.textContent = `Unattempted: ${unattemptedCount}`;
+
+            if(currentQuestionIndex < questions.length){
+                displayQuestion();
+            }
+            else{
+               
+            }
+    }
