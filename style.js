@@ -14,7 +14,7 @@ const unattemptedCountElement = document.getElementById("unattempted-count");
 const questionNumberElement = document.getElementById("question-number");
 
 let currentQuestionIndex=0;
-let question =[];
+let questions =[];
 let userAnswer=[];
 
 startButton.addEventListener('click',startQuiz);
@@ -25,8 +25,45 @@ function startQuiz(){
         userNameElement.textContent=`User: ${userName}`;
         userInputContainer.style.display ="none";
         quizContainer.style.display="block";
+        fetchQuestions();
     }
     else{
         alert("Please Enter Name");
     }
 }
+
+async function fetchQuestions(){
+    try{
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        questions=data.results;
+        displayQuestion();
+    }
+    catch (error){
+        console.error("error in fetching question",error);
+    }
+    
+}
+function displayQuestion(){
+    const question = questions[currentQuestionIndex];
+    questionElement.textContent = question.question;
+    optionsContainer.innerHTML = "";
+
+    const options =[...question.incorrect_answers, question.correct_answer];
+    
+    options.forEach((option,index)=>{
+        const radioInput=document.createElement("input");
+        radioInput.type="radio";
+        radioInput.name="answer";
+        radioInput.id= `option${index}`;
+        radioInput.value=option;
+
+        const label =document.createElement("label");
+        label.textContent=option;
+        label.setAttribute("for",`option${index}`);
+        
+        optionsContainer.appendChild(radioInput);
+        optionsContainer.appendChild(label);
+    });
+}
+
