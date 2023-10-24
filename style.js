@@ -6,7 +6,7 @@ let quizContainer = document.getElementById("quiz-container");
 let resultContainer = document.getElementById("result-container");
 let userInputContainer= document.getElementById("user-input-container");
 let questionElement = document.getElementById("question");
-let optionsContainer = document.getElementById("options-container");
+let optionsContainer = document.getElementById("option-container");
 let nextButton = document.getElementById("next-button");
 let skipButton = document.getElementById("skip-button");
 const attemptedCountElement = document.getElementById("attempted-count");
@@ -102,3 +102,5 @@ function displayQuestion(){
                
             }
     }
+
+   
