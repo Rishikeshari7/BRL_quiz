@@ -12,6 +12,9 @@ let skipButton = document.getElementById("skip-button");
 const attemptedCountElement = document.getElementById("attempted-count");
 const unattemptedCountElement = document.getElementById("unattempted-count");
 const questionNumberElement = document.getElementById("question-number");
+let playAgainButton=document.getElementById("play-again-button");
+let marksObtain = document.getElementById("marks-obtain");
+let submitButton= document.getElementById("submit-button");
 
 let currentQuestionIndex=0;
 let questions =[];
@@ -46,8 +49,9 @@ async function fetchQuestions(){
 }
 
 function displayQuestion(){
+    
     const question = questions[currentQuestionIndex];
-    questionElement.textContent = question.question;
+    questionElement.innerHTML = question.question;
     optionsContainer.innerHTML = "";
 
     const options =[...question.incorrect_answers, question.correct_answer];
@@ -83,10 +87,18 @@ function displayQuestion(){
         updateQuestionNumber();
         updateAttemptedUnattemptedCount();
 
+        if(currentQuestionIndex < questions.length){
+            displayQuestion();
+        }
+        else{
+            endQuiz();
+        }
 
     }
-    function  updateQuestionNumber(){
-        questionNumberElement.textContent = `Question: ${currentQuestionIndex + 1}`;
+
+
+    function updateQuestionNumber(){
+        questionNumberElement.textContent = `Question: ${currentQuestionIndex+1}`;
     }
     function updateAttemptedUnattemptedCount(){
         const attemptedCount = userAnswer.filter(element => element!== null).length;
@@ -103,4 +115,57 @@ function displayQuestion(){
             }
     }
 
-   
+    function skipQuestion(){
+        userAnswer.push(null);
+        currentQuestionIndex++;
+        updateAttemptedUnattemptedCount();
+        updateQuestionNumber();
+        if (currentQuestionIndex < questions.length) {
+            displayQuestion();
+        } else {
+            endQuiz();
+        }
+    }
+    
+    function calculateScore(){
+        var score=0;
+
+        for(let i=0;i<questions.length;i++){
+            if( userAnswer[i]===questions[i].correct_answer ){
+                score=score+4;
+            }
+            else if (userAnswer[i]===undefined){
+
+            }
+            else if (userAnswer[i]===null){
+                
+            }
+            else{
+                score = score-1;
+            }
+        }
+        return score;
+    }
+
+    function endQuiz(){
+        let marks = calculateScore();
+        quizContainer.style.display="none";
+        resultContainer.style.display="block";
+        marksObtain.innerHTML="";
+        marksObtain.innerHTML=`You Got :<strong> ${marks}  marks</strong>`;
+       
+    }
+    submitButton.addEventListener("click",endQuiz);
+    
+    playAgainButton.addEventListener('click',playAgain);
+
+    function  playAgain(){
+        currentQuestionIndex=0;
+        // attemptedCount=0;
+        userAnswer=[];
+        questions =[];
+        resultContainer.style.display="none";
+        userInputContainer.style.display="block";
+        fetchQuestions();
+
+    }
