@@ -30,6 +30,14 @@ h1{
     color: rgba(3, 3, 3, 0.824);
     text-decoration: underline;
 }
+#question-number{
+    font-weight: 700;
+}
+#question{
+    /* font-family: 'Times New Roman', Times, serif; */
+    font-size: 1.25em;
+    
+}
 nav{
     margin-top: 1em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

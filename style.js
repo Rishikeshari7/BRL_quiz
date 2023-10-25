@@ -51,7 +51,7 @@ async function fetchQuestions(){
 function displayQuestion(){
 
     const question = questions[currentQuestionIndex];
-    questionElement.innerHTML = question.question;
+    questionElement.innerHTML = `• ${question.question}`;
     optionsContainer.innerHTML = "";
 
     const options =[...question.incorrect_answers, question.correct_answer];
@@ -64,7 +64,7 @@ function displayQuestion(){
         radioInput.value=option;
 
         const label =document.createElement("label");
-        label.textContent=option;
+        label.innerHTML=option;
         label.setAttribute("for",`option${index}`);
         optionsContainer.appendChild(radioInput);
         optionsContainer.appendChild(label);
