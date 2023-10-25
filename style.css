@@ -22,9 +22,93 @@ header{
     width: 80%;
 
 }
+#user-input-container{
+    padding-bottom: 2em;
+}
+h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(3, 3, 3, 0.824);
+    text-decoration: underline;
+}
+nav{
+    margin-top: 1em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: space-around;
+}
+.btn{
+    background-color: rgba(13, 111, 240, 0.877);
+    
+    color: aliceblue;
+    font-weight: 400;
+    font-size: 0.9em;
+
+    border: none;
+    /* margin-left: 1em; */
+    padding: 0.5em 1em ;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+#option-container{
+    margin-top: 2em;
+}
+#user-input{
+    margin-top: 3em;
+    margin-right: 1.5em;
+}
+
+#start-button:hover , #play-again-button:hover{
+    background-color: rgb(28, 108, 212);
+    transform: scale(1.05);
+    
+}
+#next-button{
+    background-color: rgba(31, 207, 28, 0.957);
+   
+    margin: 1em 1em;
+}
+#next-button:hover{
+    transform: scale(1.05);
+    background-color: rgb(119, 179, 30);
+    
+}
+#skip-button{
+    background-color: orange;
+    margin: 2em 1em;
+}
+#skip-button:hover{
+    transform: scale(1.08);
+    background-color: rgba(240, 139, 7, 0.868);
+
+}
+#submit-button{
+    background-color: rgb(249, 49, 49);
+    margin: 1em 1em;
+}
+#submit-button:hover{
+    transform: scale(1.05);
+    background-color: rgba(216, 25, 25, 0.911);
+}
+#play-again-button:hover{
+
+}
+
 #quiz-container{
     display: none;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 500;
+    padding: 1em 2em;
+}
+/* #option-container{
+    margin-left: 5em;
+} */
+
+label {
+    margin-right: 1em;
 }
 #result-container {
     display: none;
+    font-size: 1.2em;
 }

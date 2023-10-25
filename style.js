@@ -49,7 +49,7 @@ async function fetchQuestions(){
 }
 
 function displayQuestion(){
-    
+
     const question = questions[currentQuestionIndex];
     questionElement.innerHTML = question.question;
     optionsContainer.innerHTML = "";
@@ -66,9 +66,9 @@ function displayQuestion(){
         const label =document.createElement("label");
         label.textContent=option;
         label.setAttribute("for",`option${index}`);
-        
         optionsContainer.appendChild(radioInput);
         optionsContainer.appendChild(label);
+        
     });
 }
 
@@ -169,3 +169,6 @@ function displayQuestion(){
         fetchQuestions();
 
     }
+
+
+    // 1.timer  2. button to navigate    3.changing of color of buttons    4.css
