@@ -48,12 +48,17 @@ nav{
    font-size: 1.3em;
     color: rgb(129, 1, 249);
 }
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 .btn{
     background-color: rgba(13, 111, 240, 0.877);
     
     color: aliceblue;
     font-weight: 400;
-    font-size: 0.9em;
+    font-size: 1em;
 
     border: none;
     /* margin-left: 1em; */
@@ -148,4 +153,7 @@ grid-row-gap: 10px;
     
     background-color: rgb(28, 108, 212);
     transform: scale(1.1);
+}
+.marked{
+    background-color: aquamarine;
 }

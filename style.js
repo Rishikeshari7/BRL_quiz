@@ -59,6 +59,7 @@ async function fetchQuestions(){
         questions=data.results;
         displayQuestion();
         something();
+        // createButtons();
     }
     catch (error){
         console.error("error in fetching question",error);
@@ -93,8 +94,10 @@ function displayQuestion(){
     skipButton.addEventListener("click", skipQuestion);
 
     function loadNextQuestion(){
+        // document.querySelector(`#btn_${currentQuestionIndex}`).style.background="green";
         const selectedOption = document.querySelector('input[name="answer"]:checked');
         if(selectedOption){
+             document.querySelector(`#btn_${currentQuestionIndex}`).style.background="green";
             userAnswer.push(selectedOption.value);
         }
         else{
@@ -110,6 +113,7 @@ function displayQuestion(){
         else{
             endQuiz();
         }
+        
 
     }
 
@@ -133,6 +137,7 @@ function displayQuestion(){
     }
 
     function skipQuestion(){
+        document.querySelector(`#btn_${currentQuestionIndex}`).style.background="orange";
         userAnswer.push(null);
         currentQuestionIndex++;
         updateAttemptedUnattemptedCount();
@@ -173,6 +178,10 @@ function displayQuestion(){
         marksObtain.innerHTML="";
         marksObtain.innerHTML=`You Got :<strong> ${marks}  marks</strong>`;
         buttonsContainer.style.display="none";
+        //  document.getElementsByClassName("jump-button").style.backgroundColor=" blue";
+        for (let i=0 ; i<questions.length;i++){
+            document.querySelector(`#btn_${i}`).style.backgroundColor="rgba(13, 111, 240, 0.877)";
+        }
         // jumpButton.style.display="none";
         
     }
@@ -219,6 +228,7 @@ function displayQuestion(){
             const button = document.createElement("button");
             button.textContent=`Q${i+1}`;
             button.className="jump-button";
+            button.setAttribute('id',`btn_${i}`);
             button.addEventListener('click',()=>jump(i));
             jumpButton.appendChild(button);
         }
@@ -229,6 +239,7 @@ function displayQuestion(){
             displayQuestion();
             updateQuestionNumber();
         }
+        
     }
 
 
