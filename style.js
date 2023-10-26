@@ -15,7 +15,9 @@ const questionNumberElement = document.getElementById("question-number");
 let playAgainButton=document.getElementById("play-again-button");
 let marksObtain = document.getElementById("marks-obtain");
 let submitButton= document.getElementById("submit-button");
-
+let timerElement=document.getElementById("timer");
+let buttonsContainer=document.getElementById("jump-buttons-container");
+let jumpButton = document.getElementById("jump-buttons");
 let currentQuestionIndex=0;
 let questions =[];
 let userAnswer=[];
@@ -23,17 +25,32 @@ let userAnswer=[];
 startButton.addEventListener('click',startQuiz);
 
 function startQuiz(){
+    
     let userName=userInput.value;
+     
     if(userName.trim()!==""){
         userNameElement.textContent=`User: ${userName}`;
         userInputContainer.style.display ="none";
         quizContainer.style.display="block";
         fetchQuestions();
+        timerStart();
+        
+        buttonsContainer.style.display="block";
     }
     else{
         alert("Please Enter Name");
     }
+    
 }
+var something = (function() {
+    var executed = false;
+    return function() {
+        if (!executed) {
+            executed = true;
+           createButtons();
+        }
+    };
+})();
 
 async function fetchQuestions(){
     try{
@@ -41,6 +58,7 @@ async function fetchQuestions(){
         const data = await response.json();
         questions=data.results;
         displayQuestion();
+        something();
     }
     catch (error){
         console.error("error in fetching question",error);
@@ -49,7 +67,6 @@ async function fetchQuestions(){
 }
 
 function displayQuestion(){
-
     const question = questions[currentQuestionIndex];
     questionElement.innerHTML = `• ${question.question}`;
     optionsContainer.innerHTML = "";
@@ -128,6 +145,7 @@ function displayQuestion(){
     }
     
     function calculateScore(){
+        
         var score=0;
 
         for(let i=0;i<questions.length;i++){
@@ -148,12 +166,15 @@ function displayQuestion(){
     }
 
     function endQuiz(){
+        clearInterval(timer);
         let marks = calculateScore();
         quizContainer.style.display="none";
         resultContainer.style.display="block";
         marksObtain.innerHTML="";
         marksObtain.innerHTML=`You Got :<strong> ${marks}  marks</strong>`;
-       
+        buttonsContainer.style.display="none";
+        // jumpButton.style.display="none";
+        
     }
     submitButton.addEventListener("click",endQuiz);
     
@@ -169,6 +190,46 @@ function displayQuestion(){
         fetchQuestions();
 
     }
+    function timerStart(){
+        // createButtons();
+        let timeLeft=300;
+        timerElement.innerHTML=showTime(timeLeft);
+        timer= setInterval(() =>{
+            timeLeft--;
+            timerElement.innerHTML=showTime(timeLeft);
+            if(timeLeft<=0){
+                endQuiz();
+            }
+        },1000);
+    }
+    function showTime(timeLeft){
+        let min =Math.floor(timeLeft/60);
+        let sec=timeLeft%60;
+        if(sec<10){
+            return ` &#x23F0 Time Left : 0${min}:0${sec}`;
+        }
+        else{
+            return `&#x23F0 Time Left : 0${min}:${sec}`;
+        }
+       
+    };
+    function  createButtons (){
+        
+        for (let i=0 ; i<questions.length;i++){
+            const button = document.createElement("button");
+            button.textContent=`Q${i+1}`;
+            button.className="jump-button";
+            button.addEventListener('click',()=>jump(i));
+            jumpButton.appendChild(button);
+        }
+    }
+    function jump(element){
+        if(element>=0 && element<questions.length){
+            currentQuestionIndex=element;
+            displayQuestion();
+            updateQuestionNumber();
+        }
+    }
 
 
-    // 1.timer  2. button to navigate    3.changing of color of buttons    4.css
+    //  2. button to navigate    3.changing of color of buttons    4.css

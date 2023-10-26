@@ -44,6 +44,10 @@ nav{
     display: flex;
     justify-content: space-around;
 }
+#user-name{
+   font-size: 1.3em;
+    color: rgb(129, 1, 249);
+}
 .btn{
     background-color: rgba(13, 111, 240, 0.877);
     
@@ -109,9 +113,6 @@ nav{
     font-weight: 500;
     padding: 1em 2em;
 }
-/* #option-container{
-    margin-left: 5em;
-} */
 
 label {
     margin-right: 1em;
@@ -119,4 +120,32 @@ label {
 #result-container {
     display: none;
     font-size: 1.2em;
+}
+#jump-buttons-container{
+    margin-top: -3%;
+}
+#jump-buttons-container{
+    font-size: 1.5em;
+    text-align: center;
+    display: none;
+}
+#jump-buttons{
+    display: grid;
+grid-template-columns: repeat(10, 1fr);
+grid-template-rows: repeat(2, 1fr);
+grid-column-gap: 15px;
+grid-row-gap: 10px;
+}
+.jump-button{
+    background-color: rgba(13, 111, 240, 0.877);
+    color: #fff;
+    outline: none;
+    transition: all 0.5s;
+    padding: 10px;
+    border-radius: 100%;
+}
+.jump-button:hover{
+    
+    background-color: rgb(28, 108, 212);
+    transform: scale(1.1);
 }
