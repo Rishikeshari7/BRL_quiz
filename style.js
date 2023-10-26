@@ -97,7 +97,7 @@ function displayQuestion(){
         // document.querySelector(`#btn_${currentQuestionIndex}`).style.background="green";
         const selectedOption = document.querySelector('input[name="answer"]:checked');
         if(selectedOption){
-             document.querySelector(`#btn_${currentQuestionIndex}`).style.background="green";
+             document.querySelector(`#btn_${currentQuestionIndex}`).style.background="rgba(31, 207, 28, 0.957)";
             userAnswer.push(selectedOption.value);
         }
         else{

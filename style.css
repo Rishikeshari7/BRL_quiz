@@ -142,7 +142,7 @@ grid-column-gap: 15px;
 grid-row-gap: 10px;
 }
 .jump-button{
-    background-color: rgba(13, 111, 240, 0.877);
+    background-color: rgba(40, 120, 223, 0.877);
     color: #fff;
     outline: none;
     transition: all 0.5s;
@@ -151,7 +151,7 @@ grid-row-gap: 10px;
 }
 .jump-button:hover{
     
-    background-color: rgb(28, 108, 212);
+    background-color: rgb(58, 131, 227);
     transform: scale(1.1);
 }
 .marked{
