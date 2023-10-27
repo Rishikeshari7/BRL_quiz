@@ -33,7 +33,7 @@ function startQuiz(){
         userInputContainer.style.display ="none";
         quizContainer.style.display="block";
         fetchQuestions();
-        timerStart();
+        
         
         buttonsContainer.style.display="block";
     }
@@ -59,6 +59,7 @@ async function fetchQuestions(){
         questions=data.results;
         displayQuestion();
         something();
+        timerStart();
         // createButtons();
     }
     catch (error){
@@ -72,7 +73,7 @@ function displayQuestion(){
     questionElement.innerHTML = `• ${question.question}`;
     optionsContainer.innerHTML = "";
 
-    const options =[...question.incorrect_answers, question.correct_answer];
+    var options =[...question.incorrect_answers, question.correct_answer];
     
     options.forEach((option,index)=>{
         const radioInput=document.createElement("input");
@@ -81,6 +82,17 @@ function displayQuestion(){
         radioInput.id= `option${index}`;
         radioInput.value=option;
 
+        
+         if(userAnswer[currentQuestionIndex]===option){
+            radioInput.checked=true;
+            console.log("true");
+         }  
+         
+        // if (userAnswer[currentQuestionIndex] !==null || userAnswer[currentQuestionIndex] !==undefined  ) {
+        //     radioInput.checked = true;
+           
+        // }
+       
         const label =document.createElement("label");
         label.innerHTML=option;
         label.setAttribute("for",`option${index}`);
@@ -94,15 +106,22 @@ function displayQuestion(){
     skipButton.addEventListener("click", skipQuestion);
 
     function loadNextQuestion(){
-        // document.querySelector(`#btn_${currentQuestionIndex}`).style.background="green";
+        
         const selectedOption = document.querySelector('input[name="answer"]:checked');
+        // console.log(selectedOption.id);
+
+        
         if(selectedOption){
+
+            document.getElementById(selectedOption.id).checked=true;
              document.querySelector(`#btn_${currentQuestionIndex}`).style.background="rgba(31, 207, 28, 0.957)";
             userAnswer.push(selectedOption.value);
+            
         }
         else{
             userAnswer.push(null);
         }
+        
         currentQuestionIndex++;
         updateQuestionNumber();
         updateAttemptedUnattemptedCount();
@@ -132,20 +151,29 @@ function displayQuestion(){
                 displayQuestion();
             }
             else{
-               
+                
             }
     }
 
     function skipQuestion(){
-        document.querySelector(`#btn_${currentQuestionIndex}`).style.background="orange";
-        userAnswer.push(null);
+        const againSelectedOption = document.querySelector('input[name="answer"]:checked');
+        if(againSelectedOption){
+            document.querySelector(`#btn_${currentQuestionIndex}`).style.background="purple";
+            userAnswer.push(againSelectedOption.value);
+           
+        }
+        else{
+            document.querySelector(`#btn_${currentQuestionIndex}`).style.background="orange";
+            userAnswer.push(null);
+        }
+       
         currentQuestionIndex++;
         updateAttemptedUnattemptedCount();
         updateQuestionNumber();
         if (currentQuestionIndex < questions.length) {
             displayQuestion();
         } else {
-            endQuiz();
+                endQuiz();
         }
     }
     
@@ -190,12 +218,14 @@ function displayQuestion(){
     playAgainButton.addEventListener('click',playAgain);
 
     function  playAgain(){
-        currentQuestionIndex=0;
         // attemptedCount=0;
         userAnswer=[];
         questions =[];
         resultContainer.style.display="none";
         userInputContainer.style.display="block";
+        currentQuestionIndex=0;
+        updateQuestionNumber()
+        updateAttemptedUnattemptedCount();
         fetchQuestions();
 
     }
@@ -211,6 +241,7 @@ function displayQuestion(){
             }
         },1000);
     }
+
     function showTime(timeLeft){
         let min =Math.floor(timeLeft/60);
         let sec=timeLeft%60;
@@ -234,10 +265,12 @@ function displayQuestion(){
         }
     }
     function jump(element){
+       
         if(element>=0 && element<questions.length){
             currentQuestionIndex=element;
             displayQuestion();
             updateQuestionNumber();
+            
         }
         
     }
