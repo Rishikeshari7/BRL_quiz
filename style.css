@@ -190,3 +190,81 @@ grid-row-gap: 10px;
     border: 2px solid  rgba(0, 0, 0, 0.575) ;
     border-radius: 5px;
 }
+/* ---------------media quesrry------------------- */
+@media screen and (max-width: 600px){
+    nav{
+        display: grid;
+       grid-template-columns: 1fr 1fr;
+       grid-template-rows: 1fr 1fr;
+       grid-column-gap: -15px;
+       grid-row-gap: 10px;
+    }
+    .question-conatiner{
+        border: none;
+    }
+    #jump-buttons{
+        display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 15px;
+    grid-row-gap: 10px;
+    }
+    #option-container{
+        margin-top: 0px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+     grid-template-rows: repeat(4, 1fr);
+     padding: 10px;
+     grid-row-gap: 10px;
+    }
+    input{
+        display: flex;
+        text-align: right;
+    }
+    label{
+        margin-right: 10px;
+        display: flex;
+    }
+    .btn{
+
+    }
+    input[type="text"]{
+       margin-left: 30%;
+       margin-bottom: 15px;
+    }
+    #user-input-container{
+
+    }
+    .container{
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        /* height: 50vh; */
+    }
+}
+@media screen and (max-width: 400px){
+    .container{
+        /* height: 100vh; */
+    }
+    #option-container{
+        margin-top: 0px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+     grid-template-rows: repeat(2, 1fr);
+     padding: 10px;
+     grid-row-gap: 10px;
+    }
+    #jump-buttons{
+        display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 15px;
+    grid-row-gap: 10px;
+    }
+    .container{
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        /* height: 50vh; */
+    }
+}
