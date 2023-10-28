@@ -130,7 +130,7 @@ function displayQuestion(){
             displayQuestion();
         }
         else{
-            endQuiz();
+            alert("No More Question");
         }
         
 
@@ -173,7 +173,7 @@ function displayQuestion(){
         if (currentQuestionIndex < questions.length) {
             displayQuestion();
         } else {
-                endQuiz();
+            alert("No More Question");
         }
     }
     

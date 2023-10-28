@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>Document</title>
 </head>
 <body>
@@ -12,7 +17,8 @@
             <span id="user-name">User:</span>
             <span id="attempted-count">Attempted: 0</span>
             <span id="unattempted-count">Unattempted: 20</span>
-            <span id="timer" style="color: rgb(230, 11, 11);" >&#x23F0 Time Left : 05:00</span>
+            
+            <span id="timer" style="color: rgb(213, 232, 37);" >&#x23F0 Time Left : 05:00</span>
         </nav>
         
     </header>
@@ -20,14 +26,18 @@
     <div class="container">
         <h1>Quiz Web App</h1>
         <div id="quiz-container">
-            <span id="question-number">Question: 1</span>
-            <p id="question">Waiting ...</p>
+            <div class="question-conatiner">
+                <span id="question-number">Question: 1</span>
+                <p id="question">Waiting ...</p>
+            </div>
+            
             <div id="option-container"></div>
             <button class="btn " id="next-button">Next</button>
             <button class="btn" id="skip-button">Review</button>
             <button class="btn" id="submit-button">Submit Test</button>
         </div>
         <div id="user-input-container">
+            
             <input type="text" id="user-input" placeholder="Enter your name..">
             <button class="btn" id="start-button">Start</button>
            
